@@ -36,22 +36,25 @@ public class Main {
         User user = new User("Guilherme", "guilhermeaalvarez@gmail.com", "61981568726");
 
         Restaurant designPizzas = new Restaurant("Design Pizzas");
+        Restaurant designSteaks = new Restaurant("Design Steaks");
 
         MenuItem calabresaDesign = designPizzas.createMenuItem("Calabresa", 60, "Cheese, tomato sauce, calabresa", false, false);
         MenuItem cocaDesign = designPizzas.createMenuItem("Coca-cola", 10, "300ml", true, true);
+        MenuItem steakDesign = designSteaks.createMenuItem("Steak", 50, "400g", false, true);
 
 
         List<MenuItem> items = new ArrayList<>();
         items.add(calabresaDesign);
         items.add(cocaDesign);
-        // items.add(steak);
+        //Uncomment below to test for error in chain
+        //items.add(steakDesign);
         Order order = new Order(user, designPizzas, items, new Date());
 
 
         Order orderWithTip = new TipDecorator(order, 5.00);
         Order orderWithNote = new NoteDecorator(orderWithTip, "Extra cheese, please.");
 
-        //Payment
+        //Payment - comment below to test for error in chain
         orderWithNote.setPaymentStrategy(new PixPaymentStrategy("user_pix_key"));
 
         //Notification
